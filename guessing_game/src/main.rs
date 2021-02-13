@@ -18,14 +18,16 @@ fn main() {
             .expect("Failed to read line");
         
         let guess: u32 = match guess.trim().parse() {
-            Ok(num) => num,
+            Ok(num) => {
+                times_guessed += 1;
+                num
+            },
             Err(_) => {
                 println!("Please input a number!\n");
                 continue;
             },
         };
 
-        times_guessed += 1;
         println!("You guessed: {}", guess);
 
         match guess.cmp(&secret_number) {
