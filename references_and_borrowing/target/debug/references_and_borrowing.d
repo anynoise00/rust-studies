@@ -1,0 +1,1 @@
+/mnt/c/Users/anyno/Documents/Rust\ Projects/rust-studies/references_and_borrowing/target/debug/references_and_borrowing: /mnt/c/Users/anyno/Documents/Rust\ Projects/rust-studies/references_and_borrowing/src/main.rs
