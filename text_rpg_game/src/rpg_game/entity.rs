@@ -1,3 +1,4 @@
+pub mod player;
 pub mod stats;
 
 use stats::Stats;
