@@ -1,9 +1,12 @@
 mod rpg_game;
 
 use rpg_game::combat;
-use rpg_game::entity::{Entity, stats::Stats};
+use rpg_game::entity::{stats::Stats, BaseEntity, Entity};
 
 fn main() {
-    let player = Entity::new(String::from("Player"), 1,
-        Stats::new(15, 5, 5, 5), Stats::new(5, 1, 1, 1));
+    let goblin = BaseEntity::new(
+        String::from("Goblin"),
+        Stats::new(8, 3, 8, 2),
+        Stats::new(3, 1, 4, 2),
+    );
 }

@@ -1,12 +1,12 @@
 pub struct Stats {
-    pub health: u16,
-    pub strength: u16,
-    pub intelligence: u16,
-    pub luck: u16,
+    pub health: i32,
+    pub strength: i32,
+    pub intelligence: i32,
+    pub luck: i32,
 }
 
 impl Stats {
-    pub fn sum_with(&self, other: &Stats) -> Stats {
+    pub fn summed_with(&self, other: &Stats) -> Stats {
         Stats {
             health: self.health + other.health,
             strength: self.strength + other.strength,
@@ -15,16 +15,16 @@ impl Stats {
         }
     }
 
-    pub fn multiplied(&self, n: u16) -> Stats {
+    pub fn multiplied(&self, n: i32) -> Stats {
         Stats {
             health: self.health * n,
-            strength: self.strength * n,      
+            strength: self.strength * n,
             intelligence: self.intelligence * n,
             luck: self.luck * n,
         }
     }
 
-    pub fn new(health: u16, strength: u16, intelligence: u16, luck: u16) -> Stats {
+    pub fn new(health: i32, strength: i32, intelligence: i32, luck: i32) -> Stats {
         Stats {
             health,
             strength,

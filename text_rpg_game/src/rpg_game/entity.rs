@@ -1,42 +1,55 @@
 pub mod stats;
 
+use stats::Stats;
+
 pub struct Entity {
     name: String,
-    current_health: u16,
-    level: u16,
-    pub stats: stats::Stats,
-    stat_growth: stats::Stats,
+    current_health: i32,
+    level: i32,
+    pub stats: Stats,
 }
 
 impl Entity {
-    pub fn new(name: String, level: u16, base_stats: stats::Stats, stat_growth: stats::Stats) -> Entity {
-        let mut e = Entity {
-            name,
-            current_health: 1,
-            level: 1,
-            stats: base_stats,
-            stat_growth,
-        };
+    pub fn build_entity_from(base_entity: &BaseEntity, level: i32) -> Entity {
+        let leveled_stats: Stats = base_entity
+            .base_stats
+            .summed_with(&base_entity.stat_growth.multiplied(level - 1));
 
-        e.level_up(level - e.level);
-
-        e
+        Entity {
+            name: base_entity.name.clone(),
+            level,
+            current_health: leveled_stats.health,
+            stats: leveled_stats,
+        }
     }
-    
     pub fn info(&self) {
-        println!("{}, <Lv. {}>\nHP: {}/{}", self.name,
-        self.level, self.current_health, self.stats.health);
-        println!("STR: {}, INT: {}, LCK: {}", self.stats.strength,
-        self.stats.intelligence, self.stats.luck)
+        println!(
+            "{}, <Lv. {}>\nHP: {}/{}",
+            self.name, self.level, self.current_health, self.stats.health
+        );
+        println!(
+            "STR: {}, INT: {}, LCK: {}",
+            self.stats.strength, self.stats.intelligence, self.stats.luck
+        )
     }
 
-    pub fn damaged(&self, damage: u16) {
-        self.current_health -= damage;
+    pub fn take_damage(&mut self, value: i32) {
+        self.current_health -= value;
     }
+}
 
-    fn level_up(&mut self, levels: u16) {
-        self.stats = self.stats.sum_with(&self.stat_growth.multiplied(levels));
-        self.current_health = self.stats.health;
-        self.level += levels;
+pub struct BaseEntity {
+    name: String,
+    base_stats: Stats,
+    stat_growth: Stats,
+}
+
+impl BaseEntity {
+    pub fn new(name: String, base_stats: Stats, stat_growth: Stats) -> BaseEntity {
+        BaseEntity {
+            name,
+            base_stats,
+            stat_growth,
+        }
     }
 }
