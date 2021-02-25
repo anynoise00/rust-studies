@@ -29,6 +29,10 @@ impl Player {
         &self.entity.name
     }
 
+    pub fn heal_to_full_life(&mut self) {
+        self.entity.current_health = self.entity.stats.health;
+    }
+
     pub fn gain_exp(&mut self, exp: i32, send_exp_message: bool) {
         if send_exp_message {
             println!("\nYou gained {} experience!", exp);

@@ -1,7 +1,7 @@
-pub mod combat;
 pub mod entity;
 
 use entity::player::Player;
+use rand::Rng;
 use std::io;
 
 pub fn game() {
@@ -29,21 +29,23 @@ fn game_loop(player: &mut Player) {
             String::from(
                 "\nWhat do you wanna do?\n\
                 1. Battle\n\
-                2. See stats\n\
-                3. Spend attribute points\n\
-                4. Quit\n\
+                2. Heal to full life\n\
+                3. See stats\n\
+                4. Spend attribute points\n\
+                5. Quit\n\
                 \n\
                 Choose an option: ",
             ),
             1,
             String::from("\nThis isn't a valid option."),
-            4,
+            5,
             String::from("\nThis isn't a valid option."),
         );
         match option {
-            1 => player.gain_exp(20, true),
-            2 => player.see_stats(),
-            3 => player.spend_attribute_points(),
+            1 => player.gain_exp(20 + rand::thread_rng().gen_range(-5, 6), true),
+            2 => player.heal_to_full_life(),
+            3 => player.see_stats(),
+            4 => player.spend_attribute_points(),
             _ => break,
         };
     }
