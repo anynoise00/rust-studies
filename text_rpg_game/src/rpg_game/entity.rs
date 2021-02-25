@@ -25,13 +25,18 @@ impl Entity {
     }
     pub fn info(&self) {
         println!(
-            "{}, <Lv. {}>\nHP: {}/{}",
-            self.name, self.level, self.current_health, self.stats.health
+            "\nName: {}\n\
+            HP: {}/{}, <Lv. {}>\n\
+            \n\
+            STR: {}, INT: {}, LCK: {}",
+            self.name,
+            self.current_health,
+            self.stats.health,
+            self.level,
+            self.stats.strength,
+            self.stats.intelligence,
+            self.stats.luck
         );
-        println!(
-            "STR: {}, INT: {}, LCK: {}",
-            self.stats.strength, self.stats.intelligence, self.stats.luck
-        )
     }
 
     pub fn take_damage(&mut self, value: i32) {
