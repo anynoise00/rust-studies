@@ -2,8 +2,7 @@ use std::collections::HashMap;
 
 pub fn mean(list_of_integers: &Vec<i32>) -> f32 {
     if list_of_integers.len() <= 0 {
-        println!("Operation failed: The vector passed has a length of 0 or less.");
-        return 0.0;
+        panic!("Vector has a length of 0.");
     }
 
     let mut total: i32 = 0;
@@ -16,8 +15,7 @@ pub fn mean(list_of_integers: &Vec<i32>) -> f32 {
 
 pub fn median(list_of_integers: &Vec<i32>) -> i32 {
     if list_of_integers.len() <= 0 {
-        println!("Operation failed: The vector passed has a length of 0 or less.");
-        return 0;
+        panic!("Vector has a length of 0.");
     }
 
     let middle_element_index = list_of_integers.len() / 2;
@@ -29,8 +27,7 @@ pub fn median(list_of_integers: &Vec<i32>) -> i32 {
 
 pub fn mode(list_of_integers: &Vec<i32>) -> i32 {
     if list_of_integers.len() <= 0 {
-        println!("Operation failed: The vector passed has a length of 0 or less.");
-        return 0;
+        panic!("Vector has a length of 0.");
     }
 
     let mut occurrences: HashMap<&i32, i32> = HashMap::new();
