@@ -1,7 +1,9 @@
-mod chapter_3;
-mod chapter_8;
+mod exercices;
 
-use chapter_8::{company_employee_names::Company, mean_median_mode, pig_latin::pig_latin};
+use exercices::chapter_10::lifetimes::longest;
+use exercices::chapter_8::{
+    company_employee_names::Company, mean_median_mode, pig_latin::pig_latin,
+};
 
 fn main() {
     let int_list = vec![-1, -1, -1, 1, 1, 1, 1, 2, 3, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5];
@@ -30,4 +32,23 @@ fn main() {
     default_company.list_all_employees_in_department("Non-existent".to_string());
     default_company.list_all_employees_in_department("Technology".to_string());
     default_company.list_all_employees();
+
+    // Try designing more experiments that vary the values and lifetimes
+    // of the references passed in to the longest function and how the returned
+    // reference is used. Make hypotheses about whether or not your experiments
+    // will pass the borrow checker before you compile; then check to see if you’re right!
+
+    // will compile
+    let x = "Biiiiiiig!";
+    {
+        let y = "Small";
+        longest(&x, &y);
+    }
+
+    // will not compile
+    //let w = "Biiiiiiiiiiiiig!";
+    //{
+    //    let z = "Small";
+    //}
+    //longest(&w, &z);
 }
